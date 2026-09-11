@@ -99,8 +99,9 @@ public class Main110926 {
 
     public static void borraDirectorio(String dirName) {
         File directorio = new File(dirName);
+        String[] elementos = directorio.list();
 
-        if (directorio.exists() && directorio.isDirectory() && directorio.list().length == 0) {
+        if (directorio.exists() && directorio.isDirectory() && elementos != null && elementos.length == 0) {
             directorio.delete();
         } else {
             System.out.println("ruta inexistente ou con descencencia");
@@ -138,29 +139,45 @@ public class Main110926 {
     }
 
     public static void main(String[] args) {
-        String dirName = "/tmp/proba";
-        String failName = "exemplo.txt";
+        String baseDir = "/home/dam26/IdeaProjects/AD/arquivosdir";
+        String subdir = baseDir + "/subdir";
 
-        creaDirectorio(dirName);
-        creaFicheiro(dirName, failName);
+        System.out.println("=== 1. Crear arquivosdir e comprobar ===");
+        creaDirectorio(baseDir);
+        System.out.println(eDirectorio(baseDir));
 
-        System.out.println(eDirectorio(dirName));
-        System.out.println(eFicheiro(dirName + "/" + failName));
+        System.out.println("\n=== 2. Crear Products1.txt e comprobar ===");
+        creaFicheiro(baseDir, "Products1.txt");
+        System.out.println(eFicheiro(baseDir + "/Products1.txt"));
 
-        modoAcceso(dirName, failName);
-        calculaLonxitude(dirName, failName);
+        System.out.println("\n=== 3. Crear subdir e Products2.txt ===");
+        creaDirectorio(subdir);
+        creaFicheiro(subdir, "Products2.txt");
 
-        mLectura(dirName, failName);
-        modoAcceso(dirName, failName);
+        System.out.println("\n=== 4. Mostrar contido de primeiro nivel ===");
+        mContido(baseDir);
 
-        mEscritura(dirName, failName);
-        modoAcceso(dirName, failName);
+        System.out.println("\n=== 5. Informacion de Products1.txt ===");
+        modoAcceso(baseDir, "Products1.txt");
+        calculaLonxitude(baseDir, "Products1.txt");
 
-        mContido(dirName);
+        System.out.println("\n=== 6. Forzar so lectura ===");
+        mLectura(baseDir, "Products1.txt");
+        modoAcceso(baseDir, "Products1.txt");
 
-        recur(new File(dirName));
+        System.out.println("\n=== 7. Forzar escritura ===");
+        mEscritura(baseDir, "Products1.txt");
+        modoAcceso(baseDir, "Products1.txt");
 
-        borraFicheiro(dirName, failName);
-        borraDirectorio(dirName);
+        System.out.println("\n=== 8. Borrar Products1.txt ===");
+        borraFicheiro(baseDir, "Products1.txt");
+
+        System.out.println("\n=== 9. Borrar o resto ===");
+        borraFicheiro(subdir, "Products2.txt");
+        borraDirectorio(subdir);
+        borraDirectorio(baseDir);
+
+        System.out.println("\n=== 10. Amosar recursivo (opcional) ===");
+        // recur(new File(baseDir));
     }
 }
