@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Main170926 {
-    static class Ex1 {
+    static class Pt1 {
         File texto1 = new File("/home/dam26/texto1.txt");
         File texto2 = new File("/home/dam26/texto2.txt");
 
@@ -21,10 +21,25 @@ public class Main170926 {
             entrada.close();
             salida.close();
         }
+
+        public void engadir() throws IOException {
+            FileInputStream entrada = new FileInputStream(texto1);
+            FileOutputStream salida = new FileOutputStream(texto2, true);
+
+            int byteLeido;
+
+            while ((byteLeido = entrada.read()) != -1) {
+                salida.write(byteLeido);
+            }
+
+            entrada.close();
+            salida.close();
+        }
     }
 
     public static void main(String[] args) throws IOException {
-        Ex1 ejercicio = new Ex1();
+        Pt1 ejercicio = new Pt1();
         ejercicio.copiar();
+        ejercicio.engadir();
     }
 }
