@@ -37,6 +37,10 @@ public class Main170926 {
         }
     }
 
+    static class Pt2 {
+
+    }
+
     public static void main(String[] args) throws IOException {
         Pt1 ejercicio = new Pt1();
         ejercicio.copiar();
