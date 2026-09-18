@@ -41,12 +41,27 @@ public class Main170926 {
         File foto1 = new File("/home/dam26/foto.jpg");
         File foto2 = new File("/home/dam26/foto2.jpg");
 
+        public void engadir() throws IOException {
+            FileInputStream entrada = new FileInputStream(foto1);
+            FileOutputStream salida = new FileOutputStream(foto2, true);
 
+            int byteLeido;
+
+            while ((byteLeido = entrada.read()) != -1) {
+                salida.write(byteLeido);
+            }
+
+            entrada.close();
+            salida.close();
+        }
     }
 
     public static void main(String[] args) throws IOException {
-        Pt1 ejercicio = new Pt1();
-        ejercicio.copiar();
-        ejercicio.engadir();
+        Pt1 ejercicio1 = new Pt1();
+        ejercicio1.copiar();
+        ejercicio1.engadir();
+
+        Pt2 ejercicio2 = new Pt2();
+        ejercicio2.engadir();
     }
 }
