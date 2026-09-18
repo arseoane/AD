@@ -38,6 +38,9 @@ public class Main170926 {
     }
 
     static class Pt2 {
+        File foto1 = new File("/home/dam26/foto.jpg");
+        File foto2 = new File("/home/dam26/foto2.jpg");
+
 
     }
 
