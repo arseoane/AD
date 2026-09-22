@@ -3,6 +3,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Main170926 {
@@ -78,6 +80,48 @@ public class Main170926 {
             // e faise o peche/volcado (flush) dos datos pendentes.
             entrada.close();
             salida.close();
+        }
+    }
+
+    static class XestionTextoDataStream {
+
+        private final String RUTA_FICHEIRO = "texto3.txt";
+        private final String TEXTO = "o tempo está xélido";
+
+        public static void main(String[] args) {
+            XestionTextoDataStream app = new XestionTextoDataStream();
+            try {
+                app.escribirCadeas();
+                app.lerCadeas();
+            } catch (IOException e) {
+                System.err.println("Erro ao procesar o ficheiro: " + e.getMessage());
+            }
+        }
+
+        // Método para escribir a cadea 3 veces consecutivas
+        public void escribirCadeas() throws IOException {
+            try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(RUTA_FICHEIRO))) {
+                for (int i = 0; i < 3; i++) {
+                    System.out.println("escribindo a cadea: " + TEXTO);
+                    dos.writeUTF(TEXTO);
+                    System.out.println("tamano do ficheiro: " + dos.size() + " bytes");
+                }
+                System.out.println("tamano final do ficheiro: " + dos.size() + " bytes");
+            }
+        }
+
+        // Método para ler as cadeas do ficheiro ata que non quede nada por ler
+        public void lerCadeas() throws IOException {
+            File ficheiro = new File(RUTA_FICHEIRO);
+
+            try (DataInputStream dis = new DataInputStream(new FileInputStream(ficheiro))) {
+                while (dis.available() > 0) {
+                    System.out.println("quedan: " + dis.available() + " bytes por ler");
+                    String cadeaLeida = dis.readUTF();
+                    System.out.println("cadea: " + cadeaLeida);
+                }
+                System.out.println("Xa non queda nada por ler");
+            }
         }
     }
 
