@@ -88,5 +88,8 @@ public class Main170926 {
 
         Pt2 ejercicio2 = new Pt2();
         ejercicio2.engadir();
+
+        Pt2Buffered buffered = new Pt2Buffered();
+        buffered.engadir();
     }
 }
